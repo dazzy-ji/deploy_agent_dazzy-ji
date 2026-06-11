@@ -43,3 +43,25 @@ while [[ -z "$USER_INPUT" || ! "$USER_INPUT" =~ ^[0-9]+$ ]]; do
 	read -rp "Enter a number for this workspace: " USER_INPUT
 done
 
+PROJECT_DIR="attendance_tracker_${USER_INPUT}"
+ARCHIVE_NAME="attendance_tracker_${USER_INPUT}_archive"
+
+#Directory structure
+echo "Creating directory structure for 'PROJECT_DIR' ..."
+
+#Refuse to create an existing directory
+if [ -d "$PROJECT_DIR" ]; then
+	echo "ERROR: $PROJECT_DIR already exists"
+	echo "Delete or rename directory"
+	exit 1
+fi
+
+#Checks if the user has permissions
+if [ ! -w "." ]; then
+	echo " No write permissions. Failed to write"
+	exit 1 
+fi
+
+#Creates the directories required
+mkdir -p "$PROJECT_DIR/Helpers" "$PROJECT_DIR/reports"
+echo "Directories created."
