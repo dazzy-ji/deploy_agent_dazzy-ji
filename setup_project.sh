@@ -4,6 +4,9 @@
 PROJECT_DIR=""
 ARCHIVE_NAME=""
 
+DEFAULT_WARNING="75"
+DEFAULT_FAILURE="50"
+
 #Signal Trap
 cleanup_on_interupt() {
 	trap '' SIGINT
@@ -145,4 +148,36 @@ cat > "$PROJECT_DIR/reports/reports.log" << 'EOF'
 [2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
 EOF
 
+echo "Files generated"
+
+#Dynameic configuration(using read and sed)
+read -rp "Do you want to update the attendance thresholds? (y/n): " UPDATE_CHOICE
+
+if [ "$UPDATE_CHOICE" =~ ^[Yy]$ ]; then
+	#Setting a new warning threshold
+	read -rp "Enter new warning threshold: " NEW_WARNING
+	#Checking if the input is a number between 0 and 100
+	while [[ -n "$NEW_WARNING" ]] && ! is_numeric "$NEW_WARNING"; do
+		echo "'$NEW_WARNING' is not a number between 0 and 100"
+		read -rp "Enter new warning threshold: " NEW_WARNING
+	done
+	if [ -z "$NEW_WARNING" ]; then
+		NEW_WARNING="$DEFAULT_WARNING"
+	fi
+	
+	#Setting a new failure threshold
+	read -rp "Enter new failure threshold: " NEW_FAILURE
+	#Checking if the input is a number between 0 and 100
+	while [[ -n "$NEW_FAILURE" ]] && ! is_numeric "$NEW_FAILURE"; do
+		echo "'$NEW_FAILURE' is not a number between 0 and 100"
+		read -rp "Enter new failure threshold: " NEW_FAILURE
+	done
+	if [ -z "$NEW_FAILURE" ]; then
+		NEW_FAILURE="$DEFAULT_FAILURE"
+	fi
+
+	#Validates if the warning threshold is greater than the failure threshold"
+	if [ "$NEW_FAILURE" -ge "$NEW_WARNING" ]; then
+		echo "Warning: failure threshold is greater than warning threshold"
+	fi
 
