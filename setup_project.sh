@@ -26,3 +26,20 @@ cleanup_on_interupt() {
 	exit 130
 }
 trap cleanup_on_interrupt SIGINT
+
+#Checks if the user has entered an input and if the value entered is a whole number
+is_numeric() {
+	case "$1" in
+		''|*[!0-9]*) return 1 ;;
+	esac
+	[ "$1" -ge 0 ] && [ "$1" -le 100 ]
+}
+#Prompt the user for their workspace number
+read -rp "Enter a number for this workspace: " USER_INPUT
+
+#Checks if the input is not empty and it is a whole number
+while [[ -z "$USER_INPUT" || ! "$USER_INPUT" =~ ^[0-9]+$ ]]; do
+	echo "Invalid input. Please enter a number"
+	read -rp "Enter a number for this workspace: " USER_INPUT
+done
+
