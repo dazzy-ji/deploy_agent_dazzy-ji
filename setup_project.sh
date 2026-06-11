@@ -4,9 +4,6 @@
 PROJECT_DIR=""
 ARCHIVE_NAME=""
 
-DEFAULT_WARNING="75"
-DEFAULT_FAILURE="50"
-
 #Signal Trap
 cleanup_on_interupt() {
 	trap '' SIGINT
@@ -130,11 +127,13 @@ diana@example.com,Diana Prince,15,0
 EOF
 
 #config.json
+DEFAULT_WARNING=75
+DEFAULT_FAILURE=50
 cat > "$PROJECT_DIR/Helpers/config.json" << 'EOF'
 {
     "thresholds": {
-        "warning": 75,
-        "failure": 50
+        "warning": ${DEFAULT_WARNING},
+        "failure": ${DEFAULT_FAILURE}
     },
     "run_mode": "live",
     "total_sessions": 15
@@ -180,4 +179,11 @@ if [ "$UPDATE_CHOICE" =~ ^[Yy]$ ]; then
 	if [ "$NEW_FAILURE" -ge "$NEW_WARNING" ]; then
 		echo "Warning: failure threshold is greater than warning threshold"
 	fi
-
+	
+	echo "Applying In-place edits to config.json ..."
+	sed -i "s/\"warning\": *[0-9]\+/\"warning\": ${NEW_WARNING}/" "$PROJECT_DIR/Helpers/config.json"
+	sed -i "s/\"failure\": *[0-9]\+/\"failure\": ${NEW_FAILURE}/" "$PROJECT_DIR/Helpers/config.json"
+	echo "Thresholds updated, warning=${NEW_WARNING}, failure=${NEW_FAILURE}"
+else
+	echo "Default thresholds, warning=${DEFAULT_WARNING}, failure=${DEFAULT_FAILURE}"
+fi
