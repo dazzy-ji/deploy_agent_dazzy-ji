@@ -10,8 +10,8 @@ cleanup_on_interupt() {
 	echo "SIGINT received, interupt detected!"
 
 	if [ -d "$PROJECT_DIR" ]; then
-		echo "Current state of '$PROJECT_DIR' is being archived -> ${ARCHIVE_NAME}.tar.gz"
-		if tar -czf "${ARCHIVE_NAME}.tar.gz" "$PROJECT_DIR" 2>/dev/null; then
+		echo "Current state of '$PROJECT_DIR' is being archived -> ${ARCHIVE_NAME}"
+		if tar -czf "${ARCHIVE_NAME}" "$PROJECT_DIR" 2>/dev/null; then
 			echo "Archive created"
 		else
 			echo "Failed to create archive"
