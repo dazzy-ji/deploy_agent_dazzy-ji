@@ -47,7 +47,7 @@ PROJECT_DIR="attendance_tracker_${USER_INPUT}"
 ARCHIVE_NAME="attendance_tracker_${USER_INPUT}_archive"
 
 #Directory structure
-echo "Creating directory structure for 'PROJECT_DIR' ..."
+echo "Creating directory structure for '${PROJECT_DIR}' ..."
 
 #Refuse to create an existing directory
 if [ -d "$PROJECT_DIR" ]; then
