@@ -21,11 +21,11 @@ cleanup_on_interupt() {
 		rm -rf "$PROJECT_DIR"
 		echo "Workspace cleaned"
 	else
-		echo"There is no current directory to be cleaned up."
+		echo "There is no current directory to be cleaned up."
 	fi
 	exit 130
 }
-trap cleanup_on_interrupt SIGINT
+trap cleanup_on_interupt SIGINT
 
 #Checks if the user has entered an input and if the value entered is a whole number
 is_numeric() {
@@ -129,7 +129,7 @@ EOF
 #config.json
 DEFAULT_WARNING=75
 DEFAULT_FAILURE=50
-cat > "$PROJECT_DIR/Helpers/config.json" << 'EOF'
+cat > "$PROJECT_DIR/Helpers/config.json" << EOF
 {
     "thresholds": {
         "warning": ${DEFAULT_WARNING},
@@ -152,7 +152,7 @@ echo "Files generated"
 #Dynameic configuration(using read and sed)
 read -rp "Do you want to update the attendance thresholds? (y/n): " UPDATE_CHOICE
 
-if [ "$UPDATE_CHOICE" =~ ^[Yy]$ ]; then
+if [[ "$UPDATE_CHOICE" =~ ^[Yy]$ ]]; then
 	#Setting a new warning threshold
 	read -rp "Enter new warning threshold: " NEW_WARNING
 	#Checking if the input is a number between 0 and 100
