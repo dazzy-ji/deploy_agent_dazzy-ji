@@ -187,3 +187,11 @@ if [[ "$UPDATE_CHOICE" =~ ^[Yy]$ ]]; then
 else
 	echo "Default thresholds, warning=${DEFAULT_WARNING}, failure=${DEFAULT_FAILURE}"
 fi
+
+#Health Check
+echo "Health Check ..."
+if python3 --version >/dev/null 2>&1; then
+	echo "Python found: $(python3 --version 2>&1)"
+else
+	echo "Warning: Failure to run. Pyhton3 is not installed"
+fi
