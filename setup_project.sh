@@ -5,7 +5,7 @@ PROJECT_DIR=""
 ARCHIVE_NAME=""
 
 #Signal Trap
-cleanup_on_interupt() {
+cleanup() {
 	trap '' SIGINT
 	echo "SIGINT received, interupt detected!"
 
@@ -25,7 +25,7 @@ cleanup_on_interupt() {
 	fi
 	exit 130
 }
-trap cleanup_on_interupt SIGINT
+trap cleanup SIGINT
 
 #Checks if the user has entered an input and if the value entered is a whole number
 is_numeric() {
