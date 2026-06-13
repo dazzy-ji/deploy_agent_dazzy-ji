@@ -149,7 +149,7 @@ EOF
 
 echo "Files generated"
 
-#Dynameic configuration(using read and sed)
+#Dynamic configuration(using read and sed)
 read -rp "Do you want to update the attendance thresholds? (y/n): " UPDATE_CHOICE
 
 if [[ "$UPDATE_CHOICE" =~ ^[Yy]$ ]]; then
@@ -211,9 +211,9 @@ for path in "$PROJECT_DIR/attendance_checker.py" \
 	fi
 done
 if $DIR_STRUCTURE; then
-	echo "App run successfully"
+	echo "Setup complete!"
 else
-	echo "Failed to run app"
+	echo "Structure incomplete!"
 	exit 1
 fi
 
