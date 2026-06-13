@@ -210,7 +210,7 @@ for path in "$PROJECT_DIR/attendance_checker.py" \
 		DIR_STRUCTURE=false
 	fi
 done
-if $DIR_STRUCTURE=true; then
+if $DIR_STRUCTURE; then
 	echo "App run successfully"
 else
 	echo "Failed to run app"
