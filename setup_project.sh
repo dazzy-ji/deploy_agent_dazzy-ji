@@ -189,9 +189,31 @@ else
 fi
 
 #Health Check
+#Check if python is correctly installed
 echo "Health Check ..."
 if python3 --version >/dev/null 2>&1; then
 	echo "Python found: $(python3 --version 2>&1)"
 else
-	echo "Warning: Failure to run. Pyhton3 is not installed"
+	echo "Warning: Failure to run. Python3 is not installed"
 fi
+
+#Check if the directory structure is correct
+DIR_STRUCTURE=true
+for path in "$PROJECT_DIR/attendance_checker.py" \
+		"$PROJECT_DIR/Helpers/assets.csv" \
+		"$PROJECT_DIR/Helpers/config.json" \
+		"$PROJECT_DIR/reports/reports.log"; do
+	if [ -e "$path" ]; then
+		echo "'$path' found"
+	else
+		echo "'$path' not found"
+		DIR_STRUCTURE=false
+	fi
+done
+if $DIR_STRUCTURE=true; then
+	echo "App run successfully"
+else
+	echo "Failed to run app"
+	exit 1
+fi
+
