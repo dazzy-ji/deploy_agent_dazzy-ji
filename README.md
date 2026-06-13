@@ -6,13 +6,15 @@ A shell script that builds a "Project Factory" that bootstarps the 'Student Atte
 Running the file 'setup_project.sh' does the following:
 
 1. Directory Architecture. It creates the following directory structure:
-	attendance_tracker_{input from user}/
-		|--attendance_checker.py #Main Python file
-		|--Helpers/
-		|	|--assets.csv #sample of student's data
-		|	|--config.json #contains the thresholds
-		|--reports/
-			|--reports.log #the log file
+```	
+-attendance_tracker_{input from user}/
+	-attendance_checker.py #Main Python file
+	-Helpers/
+		-assets.csv #sample of student's data
+		-config.json #contains the thresholds
+	-reports/
+		-reports.log #the log file
+```
 
 2. Dynamic Configuration
 	-The script prompts the user if they want to update the attendance thresholds which had a default warning of 75% and default failure of 50%. It then uses the sed command to perfom an "in-place" edit of the config.json file to reflect the user's values. 
