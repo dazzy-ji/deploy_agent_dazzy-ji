@@ -7,7 +7,7 @@ ARCHIVE_NAME=""
 #Signal Trap
 cleanup() {
 	trap '' SIGINT
-	echo "SIGINT received, interupt detected!"
+	echo "SIGINT received, interrupt detected!"
 
 	if [ -d "$PROJECT_DIR" ]; then
 		echo "Current state of '$PROJECT_DIR' is being archived -> ${ARCHIVE_NAME}"
