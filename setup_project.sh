@@ -175,11 +175,20 @@ if [[ "$UPDATE_CHOICE" =~ ^[Yy]$ ]]; then
 		NEW_FAILURE="$DEFAULT_FAILURE"
 	fi
 
-	#Validates if the warning threshold is greater than the failure threshold"
-	if [ "$NEW_FAILURE" -ge "$NEW_WARNING" ]; then
-		echo "Warning: failure threshold is greater than warning threshold"
-	fi
-	
+	#Check if the failure threshold is less than the warning threshold
+	while [ "$NEW_FAILURE" -ge "$NEW_WARNING" ]; do
+		echo "Warning! Failure threshold is greater than warning threshold. Enter a less failure threshold"
+		read -rp "Enter new failure threshold: " NEW_FAILURE
+		while [[ -n "$NEW_FAILURE" ]] && ! is_numeric "$NEW_FAILURE"; do
+                	echo "'$NEW_FAILURE' is not a number between 0 and 100"
+                	read -rp "Enter new failure threshold: " NEW_FAILURE
+        	done
+        	if [ -z "$NEW_FAILURE" ]; then
+                	NEW_FAILURE="$DEFAULT_FAILURE"
+        	fi
+	done
+
+	#Sed command
 	echo "Applying In-place edits to config.json ..."
 	sed -i "s/\"warning\": *[0-9]\+/\"warning\": ${NEW_WARNING}/" "$PROJECT_DIR/Helpers/config.json"
 	sed -i "s/\"failure\": *[0-9]\+/\"failure\": ${NEW_FAILURE}/" "$PROJECT_DIR/Helpers/config.json"
