@@ -45,4 +45,7 @@ Running the file 'setup_project.sh' does the following:
 
 ## Requirements
 - Bash
-- python3	 
+- python3
+
+## The Link to the walkthrough video: 
+	https://drive.google.com/file/d/1ocooU4CrFS5-byL9SwtxkvxZohtzt-4u/view?usp=sharing	 
