@@ -35,7 +35,10 @@ Running the file 'setup_project.sh' does the following:
 ## How to activate 'The Trap' signal
 	1. Run the script; bash setup_project.sh
 	2. Press Ctrl+C
-	3. The system catches the interupt, bundles the current state of the project directory into 'attendance_tracker_{userinput}_archive, deletes the incomplete directory, and terminates the SIGINT with exit status 130.
+	3. The system catches the interupt
+	4. The system bundles the current state of the directory into attendance_tracker_{input}_archive
+	5. The system deletes the incomplete directory
+	6. SIGINT is terminated by exit status 130
 
 ## Error handling
 - When you enter a directory that exists, the system refuses to create the directory and prompts you to either delete the directroy or rename.
